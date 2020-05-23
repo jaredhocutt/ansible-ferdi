@@ -21,7 +21,7 @@
 - name: Download Ferdi
   get_url:
     url: https://github.com/getferdi/ferdi/releases/download/{{ ferdi_version }}/{{ ferdi_appimage_filename }}
-    dest: "{{ ferdi_install_dir }}/ferdi.AppImage"
+    dest: "{{ ferdi_install_dir }}/Ferdi.AppImage"
     mode: 0755
 
 - name: Create Ferdi icon directory
