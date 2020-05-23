@@ -1,0 +1,10 @@
+---
+# defaults file for ferdi
+
+ferdi_version: latest
+
+ferdi_install_dir: ~/Applications
+ferdi_icon_dir: ~/.local/share/icons/custom
+ferdi_desktop_dir: ~/.local/share/applications
+
+ferdi_appimage_filename: Ferdi-{{ ferdi_version | regex_replace('^v', '') }}.AppImage

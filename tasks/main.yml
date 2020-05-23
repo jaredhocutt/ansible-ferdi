@@ -1,0 +1,43 @@
+---
+# tasks file for ferdi
+
+- block:
+    - name: Get latest release of Ferdi
+      uri:
+        url: https://api.github.com/repos/getferdi/ferdi/releases/latest
+      register: r_ferdi_latest_release
+
+    - name: Set ferdi_version to latest release
+      set_fact:
+        ferdi_version: "{{ r_ferdi_latest_release.json.tag_name }}"
+  when: ferdi_version == 'latest'
+
+- name: Create Ferdi install directory
+  file:
+    path: "{{ ferdi_install_dir }}"
+    state: directory
+    mode: 0755
+
+- name: Download Ferdi
+  get_url:
+    url: https://github.com/getferdi/ferdi/releases/download/{{ ferdi_version }}/{{ ferdi_appimage_filename }}
+    dest: "{{ ferdi_install_dir }}/ferdi.AppImage"
+    mode: 0755
+
+- name: Create Ferdi icon directory
+  file:
+    path: "{{ ferdi_icon_dir }}"
+    state: directory
+    mode: 0755
+
+- name: Add application icon
+  copy:
+    src: icon.png
+    dest: "{{ ferdi_icon_dir }}/ferdi.png"
+    mode: 0644
+
+- name: Create application shortcut
+  template:
+    src: ferdi.desktop.j2
+    dest: "{{ ferdi_desktop_dir }}/ferdi.desktop"
+    mode: 0644

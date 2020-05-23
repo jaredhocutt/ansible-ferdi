@@ -1,0 +1,23 @@
+galaxy_info:
+  role_name: ferdi
+
+  author: Jared Hocutt (@jaredhocutt)
+  description: >-
+    This role handles installing Ferdi using an AppImage.
+
+  license: MIT
+
+  # Reason: unarchive module
+  min_ansible_version: 1.4
+
+  platforms:
+  - name: Fedora
+    versions:
+    - all
+
+  galaxy_tags:
+    - ferdi
+    - chat
+    - communication
+
+dependencies: []
