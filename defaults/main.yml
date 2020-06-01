@@ -3,8 +3,4 @@
 
 ferdi_version: latest
 
-ferdi_install_dir: ~/Applications
-ferdi_icon_dir: ~/.local/share/icons/custom
-ferdi_desktop_dir: ~/.local/share/applications
-
-ferdi_appimage_filename: Ferdi-{{ ferdi_version | regex_replace('^v', '') }}.AppImage
+ferdi_rpm_filename: ferdi-{{ ferdi_version | regex_replace('^v', '') }}.x86_64.rpm

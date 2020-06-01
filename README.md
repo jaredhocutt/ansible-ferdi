@@ -1,6 +1,6 @@
 # Ferdi
 
-This role handles installing Ferdi from a release archive.
+This role handles installing Ferdi using an RPM.
 
 ## Requirements
 

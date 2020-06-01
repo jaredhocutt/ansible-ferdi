@@ -12,32 +12,14 @@
         ferdi_version: "{{ r_ferdi_latest_release.json.tag_name }}"
   when: ferdi_version == 'latest'
 
-- name: Create Ferdi install directory
-  file:
-    path: "{{ ferdi_install_dir }}"
-    state: directory
-    mode: 0755
+- name: Check if Ferdi is already installed
+  stat:
+    path: /opt/Ferdi/ferdi
+  register: r_ferdi_check_installed
 
-- name: Download Ferdi
-  get_url:
-    url: https://github.com/getferdi/ferdi/releases/download/{{ ferdi_version }}/{{ ferdi_appimage_filename }}
-    dest: "{{ ferdi_install_dir }}/Ferdi.AppImage"
-    mode: 0755
-
-- name: Create Ferdi icon directory
-  file:
-    path: "{{ ferdi_icon_dir }}"
-    state: directory
-    mode: 0755
-
-- name: Add application icon
-  copy:
-    src: icon.png
-    dest: "{{ ferdi_icon_dir }}/ferdi.png"
-    mode: 0644
-
-- name: Create application shortcut
-  template:
-    src: ferdi.desktop.j2
-    dest: "{{ ferdi_desktop_dir }}/ferdi.desktop"
-    mode: 0644
+- name: Install Ferdi
+  dnf:
+    name: https://github.com/getferdi/ferdi/releases/download/v5.5.0/{{ ferdi_rpm_filename }}
+    state: present
+  become: yes
+  when: r_ferdi_check_installed.stat.exists == False
